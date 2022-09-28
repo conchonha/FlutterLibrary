@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: any
-  provider: any
+  provider: ^6.0.0
   another_flushbar: any
   retrofit: any
   dio: any
