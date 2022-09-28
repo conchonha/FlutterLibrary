@@ -6,7 +6,7 @@ import 'base_vm.dart';
 
 class BaseWidget<T extends BaseVM> extends StatelessWidget {
   final T viewmodel;
-  final Widget child;
+  final Widget Function(BuildContext,T) child;
   final void Function(BuildContext, T)? onCallBack;
   final void Function(BuildContext)? onSuccess;
 
@@ -49,7 +49,7 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: child,
+        child: child(context,viewmodel),
       ),
     );
   }
