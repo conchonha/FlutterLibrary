@@ -7,12 +7,12 @@ class CommonListItem<T extends CommonData, V extends CommonItemWidget> extends S
   T commonData;
   CommonAction<T> iAction;
 
-  late final CommonItemWidget<T> widget;
+  late final V widget;
   late final BuildContext context;
 
 
   CommonListItem(this.commonData, this.iAction, {Key? key}) : super(key: key){
-    widget = CommonItemWidget(iAction);
+    widget = CommonItemWidget<T>(iAction) as V;
   }
 
   @override

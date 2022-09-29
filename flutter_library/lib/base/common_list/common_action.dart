@@ -7,24 +7,23 @@ class CommonAction<T extends CommonData> implements IActionListener<T>{
 
   @override
   void onCheckedListener(T data) {
-    // TODO: implement onCheckedListener
+    debugPrint("onCheckedListener: $data");
   }
 
   @override
   void onClickListener(T data) {
-    // TODO: implement onClickListener
+    debugPrint("onClickListener: $data");
   }
 
   @override
   void onLongClickListener(T data) {
-    // TODO: implement onLongClickListener
+    debugPrint("onLongClickListener: $data");
   }
 
   @override
   void onNavigate(T data) {
-    // TODO: implement onNavigate
+    debugPrint("onNavigate: $data");
   }
-
 }
 
 abstract class IActionListener<T extends CommonData>{
