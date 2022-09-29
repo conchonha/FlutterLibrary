@@ -3,8 +3,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
 class API {
+  static final _instance = API._internal();
   late Dio dio;
-  API() {
+
+  factory API(){
+    return _instance;
+  }
+
+  API._internal(){
     dio = Dio(BaseOptions(
         connectTimeout: 30000,
         responseType: ResponseType.json,

@@ -2,6 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
   SharedPreferences? _prefs;
+  static final SharedPrefs _instance = SharedPrefs._internal();
+
+  factory SharedPrefs(){
+    return _instance;
+  }
+
+  SharedPrefs._internal();
+
 
   Future initialise() async {
     _prefs = await SharedPreferences.getInstance();
@@ -25,5 +33,13 @@ class SharedPrefs {
   get<T>(String key){
     if(_prefs == null) throw("SharedPreferences not init");
     return _prefs!.get(key) as T;
+  }
+
+  removeAll(){
+    _prefs?.clear();
+  }
+
+  removeKey(String key){
+    _prefs?.remove(key);
   }
 }

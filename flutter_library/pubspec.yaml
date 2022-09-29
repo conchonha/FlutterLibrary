@@ -24,6 +24,7 @@ dependencies:
   intl: any
   regexpattern: any
   oktoast: any
+  get_it: any
   mailer: any
 
 dev_dependencies:

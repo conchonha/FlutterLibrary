@@ -6,15 +6,13 @@ import 'base_vm.dart';
 
 class BaseWidget<T extends BaseVM> extends StatelessWidget {
   final T viewmodel;
-  final Widget Function(BuildContext,T) child;
+  final Widget child;
   final void Function(BuildContext, T)? onCallBack;
-  final void Function(BuildContext)? onSuccess;
 
   BaseWidget(
       {required this.viewmodel,
       required this.child,
-      this.onCallBack,
-      this.onSuccess});
+      this.onCallBack});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
         };
 
         viewmodel.onError = (mss) {
-          print("onError");
+          print("onError: mss = $mss");
           SnackBarBuilder.snackBarNotification(
             context,
             mss,
@@ -49,7 +47,7 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: child(context,viewmodel),
+        child: child,
       ),
     );
   }

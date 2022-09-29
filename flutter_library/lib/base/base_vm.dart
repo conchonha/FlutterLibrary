@@ -2,10 +2,19 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_library/services/api.dart';
+
+import '../utils/navigator_services.dart';
 
 
 abstract class BaseVM extends ChangeNotifier {
   Set<StreamSubscription> managerStream = HashSet();
+
+  @protected
+  final NavigatorServices navigator = NavigatorServices();
+
+  @protected
+  final API api = API();
 
   bool isShowLoading = false;
   VoidCallback? onLoading;
