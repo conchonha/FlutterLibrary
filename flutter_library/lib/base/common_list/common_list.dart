@@ -22,7 +22,7 @@ class CommonListItem<T extends CommonData> extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        iAction.onCheckedListener(commonData);
+        iAction.onClickListener(commonData);
       },
       onLongPress: () {
         iAction.onLongClickListener(commonData);

@@ -2,16 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CommonData {
-  String title;
-  String subTitle;
   DataType dataType;
-  bool isChecked;
 
-  CommonData(
-      {this.title = "",
-      this.subTitle = "",
-      this.dataType = DataType.TYPE_LIST_ARROW_PREVIEW,
-      this.isChecked = false});
+  CommonData({
+    this.dataType = DataType.TYPE_LIST_ARROW_PREVIEW,
+  });
 }
 
 enum DataType {
