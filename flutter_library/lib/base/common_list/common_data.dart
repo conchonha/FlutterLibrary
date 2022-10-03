@@ -5,14 +5,12 @@ class CommonData {
   String title;
   String subTitle;
   DataType dataType;
-  Color leadingColor;
   bool isChecked;
 
   CommonData(
       {this.title = "",
       this.subTitle = "",
       this.dataType = DataType.TYPE_LIST_ARROW_PREVIEW,
-      this.leadingColor = const Color(0xFF06102B),
       this.isChecked = false});
 }
 

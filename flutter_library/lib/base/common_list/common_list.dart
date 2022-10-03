@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'common_action.dart';
 import 'common_data.dart';
 
-class CommonListItem<T extends CommonData, V extends CommonItemWidget> extends StatelessWidget {
+class CommonListItem<T extends CommonData> extends StatelessWidget {
   T commonData;
   CommonAction<T> iAction;
 
-  late final V widget;
+  final CommonItemWidget widget;
   late final BuildContext context;
 
 
-  CommonListItem(this.commonData, this.iAction, {Key? key}) : super(key: key){
-    widget = CommonItemWidget<T>(iAction) as V;
+  CommonListItem(this.commonData, this.iAction,this.widget, {Key? key}) : super(key: key){
+    widget.iAction = iAction;
+    widget.commonData = commonData;
   }
 
   @override
@@ -53,9 +54,12 @@ class CommonListItem<T extends CommonData, V extends CommonItemWidget> extends S
 }
 
  class CommonItemWidget<T extends CommonData>{
-  CommonAction<T> iAction;
+  late CommonAction<T> iAction;
+  late T commonData;
 
-  CommonItemWidget(this.iAction);
+  CommonItemWidget.init(this.iAction);
+
+  CommonItemWidget();
 
   @protected
   Widget typeListArrow() => const SizedBox.shrink();
