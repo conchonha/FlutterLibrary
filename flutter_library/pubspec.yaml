@@ -34,9 +34,9 @@ dev_dependencies:
   floor_generator: any
   retrofit_generator: any
   build_runner: any
-  json_serializable: any
   pretty_dio_logger: any
   json_annotation: any
+  json_serializable: '>4.4.0'
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
