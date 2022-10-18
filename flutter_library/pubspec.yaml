@@ -16,6 +16,7 @@ dependencies:
   another_flushbar: any
   retrofit: any
   dio: any
+  json_annotation: any
   rxdart: any
   connectivity_plus: any
   floor: any
@@ -32,11 +33,11 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: any
   floor_generator: any
-  retrofit_generator: any
-  build_runner: '>2.3.0 <4.0.0'
   pretty_dio_logger: any
   json_annotation: any
-  json_serializable: '>4.4.0'
+  build_runner: any
+  retrofit_generator: any
+  json_serializable: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
