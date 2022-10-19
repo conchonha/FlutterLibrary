@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_library/utils/loading_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/snackbar_builder.dart';
@@ -21,7 +22,8 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
         viewmodel.onInit();
 
         viewmodel.onLoading = () {
-          print("onLoading");
+          print('onLoading');
+          LoadingDialog.showLoaderDialog(context);
         };
 
         viewmodel.onHideLoading = () {
