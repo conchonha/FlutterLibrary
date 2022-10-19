@@ -14,18 +14,13 @@ dependencies:
   path: ^1.7.0
   provider: ^6.0.0
   another_flushbar: any
-  retrofit: any
-  dio: any
-  json_annotation: any
   rxdart: any
   connectivity_plus: any
   floor: any
   shared_preferences: any
   flutter_svg: any
-  intl: any
   regexpattern: any
   oktoast: any
-  get_it: any
   mailer: any
 
 dev_dependencies:
@@ -34,10 +29,6 @@ dev_dependencies:
   flutter_lints: any
   floor_generator: any
   pretty_dio_logger: any
-  json_annotation: any
-  build_runner: any
-  retrofit_generator: any
-  json_serializable: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

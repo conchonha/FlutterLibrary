@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_library/services/api.dart';
 
 import '../utils/navigator_services.dart';
+import '../utils/shared_prefs.dart';
 
 
 abstract class BaseVM extends ChangeNotifier {
@@ -14,7 +15,7 @@ abstract class BaseVM extends ChangeNotifier {
   final NavigatorServices navigator = NavigatorServices();
 
   @protected
-  final API api = API();
+  SharedPrefs sharedPrefs = SharedPrefs();
 
   bool isShowLoading = false;
   VoidCallback? onLoading;
@@ -48,10 +49,6 @@ abstract class BaseVM extends ChangeNotifier {
 
   void showError(String message) {
     onError?.call(message);
-  }
-
-  void showHandleFailed() {
-    onError?.call("Xử lý thất bại. Vui lòng thử lại");
   }
 
   void addStreamListener<T>(Stream<T> stream, Function(T) result,
