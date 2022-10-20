@@ -36,8 +36,10 @@ abstract class BaseVM extends ChangeNotifier {
   }
 
   void popupLoading() {
-    isShowLoading = true;
-    onLoading?.call();
+    if(isShowLoading = false){
+      isShowLoading = true;
+      onLoading?.call();
+    }
   }
 
   void hideLoading() {
@@ -45,6 +47,21 @@ abstract class BaseVM extends ChangeNotifier {
       isShowLoading = false;
       onHideLoading?.call();
     }
+  }
+
+  void callApi<T>(Future<T> callApi, Function(T) onSuccess,
+      {bool? closeLoading = true}) {
+    popupLoading();
+    callApi.then((value) {
+      if (closeLoading!) {
+        hideLoading();
+      }
+      onSuccess.call(value);
+    }).onError((error, stackTrace) {
+      hideLoading();
+      onError?.call(error.toString());
+      hideLoading();
+    });
   }
 
   void showError(String message) {
