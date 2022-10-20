@@ -22,6 +22,7 @@ dependencies:
   regexpattern: any
   oktoast: any
   mailer: any
+  gson: 0.1.6-dev
 
 
 dev_dependencies:
