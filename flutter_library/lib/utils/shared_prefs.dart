@@ -30,9 +30,9 @@ class SharedPrefs {
     }
   }
 
-  get<T>(String key){
+  T? get<T>(String key){
     if(_prefs == null) throw("SharedPreferences not init");
-    return _prefs!.get(key) as T;
+    return _prefs!.get(key) as T?;
   }
 
   removeAll(){
