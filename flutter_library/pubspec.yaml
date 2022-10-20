@@ -22,7 +22,7 @@ dependencies:
   regexpattern: any
   oktoast: any
   mailer: any
-  gson: ^0.1.4
+
 
 dev_dependencies:
   flutter_test:
