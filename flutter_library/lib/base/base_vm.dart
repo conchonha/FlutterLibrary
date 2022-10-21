@@ -24,6 +24,7 @@ abstract class BaseVM extends ChangeNotifier {
   void onInit();
 
   void popupLoading() {
+    debugPrint('popupLoading called() with: $countApi');
     if (countApi == 0) {
       onLoading?.call();
     }
@@ -31,6 +32,7 @@ abstract class BaseVM extends ChangeNotifier {
   }
 
   void hideLoading() {
+    debugPrint('popupLoading called() with: $countApi');
     --countApi;
     if (countApi <= 0) {
       onHideLoading?.call();
