@@ -1,17 +1,22 @@
+import 'dart:convert';
+
+import 'package:gson/gson.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
+  final Gson _gson = Gson();
   SharedPreferences? _prefs;
   static final SharedPrefs _instance = SharedPrefs._internal();
 
-  factory SharedPrefs(){
+  factory SharedPrefs() {
     return _instance;
   }
 
-  SharedPrefs._internal();
+  SharedPrefs._internal() {
+    _initialise();
+  }
 
-
-  Future initialise() async {
+  Future _initialise() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
@@ -27,19 +32,38 @@ class SharedPrefs {
       _prefs!.setBool(key, value);
     } else if (value is List<String>) {
       _prefs!.setStringList(key, value);
+    } else {
+      _prefs!.setString(key, _gson.encode(value));
     }
   }
 
-  T? get<T>(String key){
-    if(_prefs == null) throw("SharedPreferences not init");
+  T? get<T>(String key) {
+    if (_prefs == null) throw ("SharedPreferences not init");
     return _prefs!.get(key) as T?;
   }
 
-  removeAll(){
+  Map<String, dynamic>? getValueFromJson(String jsonKey) {
+    if (_prefs == null) throw ("SharedPreferences not init");
+    final value = get<String>(jsonKey);
+    return value != null ? jsonDecode(value) : null;
+  }
+
+  T? getObject<T>(T Function(Map<String, dynamic>) factory, String jsonKey) {
+    if (_prefs == null) throw ("SharedPreferences not init");
+    final value = getValueFromJson(jsonKey);
+    if (value != null) {
+      return factory.call(value);
+    }
+    return null;
+  }
+
+  removeAll() {
+    if (_prefs == null) throw ("SharedPreferences not init");
     _prefs?.clear();
   }
 
-  removeKey(String key){
+  removeKey(String key) {
+    if (_prefs == null) throw ("SharedPreferences not init");
     _prefs?.remove(key);
   }
 }

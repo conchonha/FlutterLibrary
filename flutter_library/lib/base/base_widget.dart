@@ -10,7 +10,7 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
   final Widget child;
   final void Function(BuildContext, T)? onCallBack;
 
-  BaseWidget(
+  const BaseWidget(
       {required this.viewmodel,
       required this.child,
       this.onCallBack});
@@ -22,19 +22,18 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
         viewmodel.onInit();
 
         viewmodel.onLoading = () {
-          print('onLoading');
-          LoadingDialog.showLoaderDialog(context);
+          debugPrint('onLoading called()');
+          LoadingDialog.showLoaderDialog();
         };
 
         viewmodel.onHideLoading = () {
-          print("onHideLoading");
+          debugPrint("onHideLoading called()");
           Navigator.of(context).pop();
         };
 
         viewmodel.onError = (mss) {
-          print("onError: mss = $mss");
+          debugPrint("showError: mss = $mss");
           SnackBarBuilder.snackBarNotification(
-            context,
             mss,
             Colors.red,
             Colors.white,

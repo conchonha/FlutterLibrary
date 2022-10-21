@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_library/services/api.dart';
 
 import '../utils/navigator_services.dart';
 import '../utils/shared_prefs.dart';
 
-
 abstract class BaseVM extends ChangeNotifier {
   Set<StreamSubscription> managerStream = HashSet();
+  int countApi = 0;
 
   @protected
   final NavigatorServices navigator = NavigatorServices();
@@ -17,7 +16,6 @@ abstract class BaseVM extends ChangeNotifier {
   @protected
   SharedPrefs sharedPrefs = SharedPrefs();
 
-  bool isShowLoading = false;
   VoidCallback? onLoading;
   VoidCallback? onHideLoading;
   void Function(String)? onError;
@@ -25,26 +23,16 @@ abstract class BaseVM extends ChangeNotifier {
   @protected
   void onInit();
 
-  @protected
-  void viewAppear() {
-    //Todo something
-  }
-
-  @protected
-  void viewDisAppear() {
-    //Todo something
-  }
-
   void popupLoading() {
-    if(isShowLoading = false){
-      isShowLoading = true;
+    if (countApi == 0) {
       onLoading?.call();
     }
+    countApi++;
   }
 
   void hideLoading() {
-    if (isShowLoading) {
-      isShowLoading = false;
+    --countApi;
+    if (countApi <= 0) {
       onHideLoading?.call();
     }
   }
@@ -53,33 +41,30 @@ abstract class BaseVM extends ChangeNotifier {
       {bool? closeLoading = true}) {
     popupLoading();
     callApi.then((value) {
-      if (closeLoading!) {
-        hideLoading();
-      }
+      debugPrint("Call api success: $value");
+      hideLoading();
       onSuccess.call(value);
     }).onError((error, stackTrace) {
       hideLoading();
-      onError?.call(error.toString());
-      hideLoading();
+      showError(error.toString());
     });
   }
 
   void showError(String message) {
+    debugPrint("show error: $message");
     onError?.call(message);
   }
 
   void addStreamListener<T>(Stream<T> stream, Function(T) result,
       {Function? onErr, Function? onDone}) {
-    managerStream.add(
-        stream.listen((event) {
-          result.call(event);
-        }, onError: onErr,
-            onDone: onDone?.call())
-    );
+    managerStream.add(stream.listen((event) {
+      result.call(event);
+    }, onError: onErr, onDone: onDone?.call()));
   }
 
   @override
   void dispose() {
+    debugPrint("dispose called()");
     for (var element in managerStream) {
       element.cancel();
     }

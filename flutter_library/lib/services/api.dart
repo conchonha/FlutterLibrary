@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class API {
   static final _instance = API._internal();
@@ -31,7 +32,7 @@ class API {
           return handler.next(options); //continue
         },
         onError: (DioError error, handler) async {
-          print("error:$error");
+          debugPrint("error:$error");
           final connectivityResult = await (Connectivity().checkConnectivity());
 
           if (connectivityResult == ConnectivityResult.none) {

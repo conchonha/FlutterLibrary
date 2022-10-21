@@ -5,12 +5,12 @@ class ValidateUtil {
     if (em == null) return false;
     String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = new RegExp(p);
+    RegExp regExp = RegExp(p);
     return regExp.hasMatch(em);
   }
 
   static bool isNumber(String value) {
-    RegExp regExp = new RegExp(r'^[0-9]*$');
+    RegExp regExp = RegExp(r'^[0-9]*$');
     return regExp.hasMatch(value);
   }
 
@@ -20,7 +20,7 @@ class ValidateUtil {
     }
     //(?<!\d)\d{4,}(?!\d)
     //r'^(?=.*[a-zA-Z]{3,})(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,20})(?!\d{4,})(?!\[!@#\$%\^&]{4,})',
-    RegExp regExp = new RegExp(
+    RegExp regExp = RegExp(
       //r'^\S*(?=\S{8,20})(?=((?!S*[\d]{4,}).)(?=\S*[a-zA-Z]){3,})(?=\S*[\d])(?=\S*[\W])\S*$',
       r'^(?=.*[a-zA-Z]{3,})(?=.*[0-9])(?=.*[\(\)\\|!@#\/$%\^&\*+\+\-\=\_\?\>\<\.\,\]\[\{\}\~\`])(?!.*(.)\1{3,})(?!.*(1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321)).{8,20}$',
       caseSensitive: false,
@@ -60,14 +60,14 @@ class ValidateUtil {
   }
 
   static bool isPhoneValid(String value) {
-    if (value.contains(new RegExp(r'[A-Z]')) ||
-        value.contains(new RegExp(r'[a-z]'))) {
+    if (value.contains(RegExp(r'[A-Z]')) ||
+        value.contains(RegExp(r'[a-z]'))) {
       return false;
     }
     return true;
   }
 
-  static bool isPhoneUser(String phone) {
+  static bool isPhoneUser(String? phone) {
     if (phone != null && RegVal.hasMatch(phone, RegexPattern.phone)) {
       return true;
     }

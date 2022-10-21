@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_library/utils/navigator_services.dart';
 
 class LoadingDialog {
-  static void showLoadingDialog(BuildContext context) {
+  static void showLoadingDialog() {
     showDialog(
-        context: context,
+        context: globalKey.getCurrentContext,
         barrierDismissible: true,
         builder: (context) => const Dialog(
           elevation: 0,
@@ -13,8 +14,8 @@ class LoadingDialog {
             ));
   }
 
-  static void showLoaderDialog(BuildContext context){
-    print("showLoaderDialog");
+  static void showLoaderDialog(){
+    debugPrint("showLoaderDialog");
     AlertDialog alert=AlertDialog(
       content: Row(
         children: [
@@ -23,7 +24,7 @@ class LoadingDialog {
         ],),
     );
     showDialog(barrierDismissible: false,
-      context:context,
+      context:globalKey.getCurrentContext,
       builder:(BuildContext context){
         return alert;
       },
@@ -31,6 +32,6 @@ class LoadingDialog {
   }
 
   static void hideDialog(BuildContext context) {
-    Navigator.of(context).pop(showLoadingDialog);
+    Navigator.of(globalKey.getCurrentContext).pop(showLoadingDialog);
   }
 }
