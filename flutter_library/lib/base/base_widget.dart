@@ -19,7 +19,9 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
       create: (_) {
-        viewmodel.onInit();
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          viewmodel.onInit();
+        });
 
         viewmodel.onLoading = () {
           debugPrint('onLoading called()');
