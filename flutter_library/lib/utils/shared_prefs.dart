@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:gson/gson.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,6 +52,7 @@ class SharedPrefs {
   T? getObject<T>(T Function(Map<String, dynamic>) factory, String jsonKey) {
     if (_prefs == null) throw ("SharedPreferences not init");
     final value = getValueFromJson(jsonKey);
+    debugPrint("getObject value: $value");
     if (value != null) {
       return factory.call(value);
     }
