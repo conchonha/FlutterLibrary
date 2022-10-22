@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+@JsonSerializable()
 class CommonData {
-  DataType dataType;
+  @JsonKey(ignore: true)
+  final DataType dataType;
 
   CommonData({
     this.dataType = DataType.TYPE_LIST_ARROW_PREVIEW,
