@@ -58,10 +58,12 @@ abstract class BaseVM extends ChangeNotifier {
   }
 
   void addStreamListener<T>(Stream<T> stream, Function(T) result,
-      {Function? onErr, Function? onDone}) {
+      { Function? onDone}) {
     managerStream.add(stream.listen((event) {
       result.call(event);
-    }, onError: onErr, onDone: onDone?.call()));
+    }, onError: (error){
+        showError("Stream listener error: ${error.toString()}");
+    }, onDone: onDone?.call()));
   }
 
   @override
