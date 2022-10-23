@@ -16,7 +16,6 @@ dependencies:
   another_flushbar: any
   rxdart: any
   connectivity_plus: any
-  floor: any
   shared_preferences: any
   flutter_svg: any
   regexpattern: any
