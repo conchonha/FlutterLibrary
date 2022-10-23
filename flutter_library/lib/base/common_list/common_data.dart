@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class CommonData {
+  @ColumnInfo(name: null)
   @JsonKey(ignore: true)
   final DataType dataType;
 
