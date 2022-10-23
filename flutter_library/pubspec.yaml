@@ -22,8 +22,12 @@ dependencies:
   oktoast: any
   mailer: any
   gson: 0.1.6-dev
-  json_annotation: any
   floor: any
+  get_it: any
+  retrofit: any
+  dio: any
+  http: any
+  json_annotation: any
 
 
 dev_dependencies:
