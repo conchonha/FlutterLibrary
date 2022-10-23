@@ -22,13 +22,14 @@ dependencies:
   oktoast: any
   mailer: any
   gson: 0.1.6-dev
+  json_annotation: any
+  floor: any
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: any
-  floor_generator: any
   pretty_dio_logger: any
 
 # For information on the generic Dart part of this file, see the
