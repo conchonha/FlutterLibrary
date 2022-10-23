@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../utils/navigator_services.dart';
 import 'common_data.dart';
 
 class CommonAction<T extends CommonData> implements IActionListener<T>{
-  const CommonAction();
+  @protected
+  final NavigatorServices navigator = NavigatorServices();
+
+  CommonAction();
 
   @override
   void onCheckedListener(T data) {
