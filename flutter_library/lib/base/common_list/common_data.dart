@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 class CommonData {
   @ColumnInfo(name: null)
   @JsonKey(ignore: true)
-  final DataType dataType;
+  final DataType? dataType;
 
   CommonData({
     this.dataType = DataType.TYPE_LIST_ARROW_PREVIEW,
