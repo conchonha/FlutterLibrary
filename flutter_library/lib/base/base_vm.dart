@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_library/utils/handle_network_error_dio.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../utils/navigator_services.dart';
@@ -51,7 +53,7 @@ abstract class BaseVM extends ChangeNotifier {
       onSuccess.call(value);
     }).onError((error, stackTrace) {
       hideLoading();
-      showToast(error.toString(),position: ToastPosition.bottom);
+      // error?.handleError();
       // showError(error.toString());
     });
   }
