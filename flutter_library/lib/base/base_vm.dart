@@ -34,7 +34,7 @@ abstract class BaseVM extends ChangeNotifier {
 
   void hideLoading() {
     --countApi;
-    if (countApi <= 0) {
+    if (countApi == 0) {
       onHideLoading?.call();
     }
     debugPrint('hideLoading called() with: $countApi');
