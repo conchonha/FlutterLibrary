@@ -51,7 +51,7 @@ abstract class BaseVM extends ChangeNotifier {
       onSuccess.call(value);
     }).onError((error, stackTrace) {
       hideLoading();
-      showToast(error.toString());
+      showToast(error.toString(),position: ToastPosition.bottom);
       // showError(error.toString());
     });
   }
