@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 
 import '../utils/navigator_services.dart';
 import '../utils/shared_prefs.dart';
@@ -41,14 +42,17 @@ abstract class BaseVM extends ChangeNotifier {
 
   void callApi<T>(Future<T> callApi, Function(T) onSuccess,
       {bool? closeLoading = true}) {
-    popupLoading();
+    if(closeLoading == true){
+      popupLoading();
+    }
     callApi.then((value) {
       debugPrint("Call api success: $value");
       hideLoading();
       onSuccess.call(value);
     }).onError((error, stackTrace) {
       hideLoading();
-      showError(error.toString());
+      showToast(error.toString());
+      // showError(error.toString());
     });
   }
 
