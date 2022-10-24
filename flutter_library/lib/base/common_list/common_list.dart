@@ -8,7 +8,7 @@ class CommonListItem<T extends CommonData> extends StatelessWidget {
   CommonAction<T> iAction;
 
   final CommonItemWidget widget;
-  late final BuildContext context;
+  late BuildContext context;
 
 
   CommonListItem(this.commonData, this.iAction,this.widget, {Key? key}) : super(key: key){
