@@ -28,6 +28,16 @@ class CommonAction<T extends CommonData> implements IActionListener<T>{
   void onNavigate(T data) {
     debugPrint("onNavigate: $data");
   }
+
+  @override
+  void onDelete(T data) {
+    debugPrint("onDelete: $data");
+  }
+
+  @override
+  void onUpdate(T data) {
+    debugPrint("onUpdate: $data");
+  }
 }
 
 abstract class IActionListener<T extends CommonData>{
@@ -35,4 +45,6 @@ abstract class IActionListener<T extends CommonData>{
   void onLongClickListener(T data);
   void onCheckedListener(T data);
   void onNavigate(T data);
+  void onDelete(T data);
+  void onUpdate(T data);
 }
