@@ -3,19 +3,21 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-class API {
-  static final _instance = API._internal();
+const _defaultConnectTimeout = Duration.millisecondsPerMinute;
+const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
+
+class DIO {
   late Dio dio;
 
-  factory API(){
-    return _instance;
-  }
-
-  API._internal(){
-    dio = Dio(BaseOptions(
-        connectTimeout: 30000,
-        responseType: ResponseType.json,
-        contentType: ContentType.json.toString()))
+  DIO() {
+    dio = Dio(
+      BaseOptions(
+          connectTimeout: _defaultConnectTimeout,
+          receiveTimeout: _defaultReceiveTimeout,
+          responseType: ResponseType.json,
+          contentType: ContentType.json.toString(),
+          headers: {'Content-Type': 'application/json; charset=UTF-8'}),
+    )
       ..interceptors.add(LogInterceptor(
         request: true,
         requestBody: true,
@@ -81,5 +83,21 @@ class API {
               error: "Kết nối Server thất bại. Vui lòng thử lại")); //continue
         },
       ));
+  }
+}
+
+typedef TypeServices<T> = T Function(Dio dio,{String baseUrl});
+class Api<T>{
+  late final T client;
+
+  /// when using library register [Api] with [LocatorLibrary] -> singleTon client
+  Api(TypeServices<T> getClient) {
+    client = getClient as T;
+  }
+
+  /// used in special cases such as having many services and many other base urls
+  /// -> not register [LocatorLibrary] singleTon
+  static V getClientService<V>(TypeServices<V> getClient){
+    return getClient as V;
   }
 }

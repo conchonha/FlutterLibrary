@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/utils/loading_dialog.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/snackbar_builder.dart';
 import 'base_vm.dart';
 
 class BaseWidget<T extends BaseVM> extends StatelessWidget {
-  final T viewmodel;
+  final T viewModel;
   final Widget child;
   final void Function(BuildContext, T)? onCallBack;
 
   const BaseWidget(
-      {required this.viewmodel,
+      {required this.viewModel,
       required this.child,
       this.onCallBack});
 
@@ -20,31 +18,12 @@ class BaseWidget<T extends BaseVM> extends StatelessWidget {
     return ChangeNotifierProvider<T>(
       create: (_) {
         WidgetsBinding.instance.addPostFrameCallback((_){
-          viewmodel.onInit();
+          viewModel.onInit();
         });
 
-        viewmodel.onLoading = () {
-          debugPrint('onLoading called()');
-          LoadingDialog.showLoaderDialog();
-        };
+        onCallBack?.call(context, viewModel);
 
-        viewmodel.onHideLoading = () {
-          debugPrint("onHideLoading called()");
-          Navigator.of(context).pop();
-        };
-
-        viewmodel.onError = (mss) {
-          debugPrint("showError: mss = $mss");
-          SnackBarBuilder.snackBarNotification(
-            mss,
-            Colors.red,
-            Colors.white,
-          );
-        };
-
-        onCallBack?.call(context, viewmodel);
-
-        return viewmodel;
+        return viewModel;
       },
       builder: (ct, _) => GestureDetector(
         onTap: () {

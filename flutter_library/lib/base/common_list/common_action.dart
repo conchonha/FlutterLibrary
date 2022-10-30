@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../utils/navigator_services.dart';
+import 'package:flutter_library/utils/locator_library.dart';
+import '../../utils/programing_manager/programing_manager.dart';
 import 'common_data.dart';
 
 class CommonAction<T extends CommonData> implements IActionListener<T>{
   @protected
-  final NavigatorServices navigator = NavigatorServices();
-
-  CommonAction();
+  final manager = locatorLibrary<ProgramingManager>();
 
   @override
   void onCheckedListener(T data) {

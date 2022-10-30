@@ -1,83 +1,40 @@
-import 'dart:async';
-import 'dart:collection';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_library/utils/handle_network_error_dio.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:flutter_library/model/data/result.dart';
 
-import '../utils/navigator_services.dart';
-import '../utils/shared_prefs.dart';
+import '../model/navigate_model.dart';
+import '../utils/locator_library.dart';
+import '../utils/programing_manager/programing_manager.dart';
 
 abstract class BaseVM extends ChangeNotifier {
-  Set<StreamSubscription> managerStream = HashSet();
-  int countApi = 0;
-
   @protected
-  final NavigatorServices navigator = NavigatorServices();
-
-  @protected
-  SharedPrefs sharedPrefs = SharedPrefs();
-
-  VoidCallback? onLoading;
-  VoidCallback? onHideLoading;
-  void Function(String)? onError;
+  final manager = locatorLibrary<ProgramingManager>();
 
   @protected
   void onInit();
 
-  void popupLoading() {
-    if (countApi == 0) {
-      onLoading?.call();
-    }
-    ++countApi;
-    debugPrint('popupLoading called() with: $countApi');
+  @protected
+  void navigate(NavigateModel navigateModel){
+    manager.setResult(Result.navigate(navigateModel: navigateModel));
   }
 
-  void hideLoading() {
-    --countApi;
-    if (countApi == 0) {
-      onHideLoading?.call();
-    }
-    debugPrint('hideLoading called() with: $countApi');
+  @protected
+  void isLoading(bool value){
+    manager.setResult(Result.loading(loading: value));
   }
 
-  void callApi<T>(Future<T> callApi, Function(T) onSuccess,
-      {bool? closeLoading = true}) {
-    if(closeLoading == true){
-      popupLoading();
-    }
-    callApi.then((value) {
-      debugPrint("Call api success: $value");
-      hideLoading();
-      onSuccess.call(value);
-    }).onError((error, stackTrace) {
-      hideLoading();
-      // error?.handleError();
-      // showError(error.toString());
-    });
+  @protected
+  void showToast(String message){
+    manager.setResult(Result.showToast(message: message));
   }
 
-  void showError(String message) {
-    debugPrint("show error: $message");
-    onError?.call(message);
-  }
-
-  void addStreamListener<T>(Stream<T> stream, Function(T) result,
-      { Function? onDone}) {
-    managerStream.add(stream.listen((event) {
-      result.call(event);
-    }, onError: (error){
-        showError("Stream listener error: ${error.toString()}");
-    }, onDone: onDone?.call()));
+  @protected
+  void handleError(dynamic exception){
+    manager.setResult(Result.fail(error: exception));
   }
 
   @override
   void dispose() {
-    debugPrint("dispose called()");
-    for (var element in managerStream) {
-      element.cancel();
-    }
+    manager.cancelAll();
     super.dispose();
   }
 }

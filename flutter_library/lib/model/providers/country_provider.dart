@@ -4,7 +4,9 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 
 import '../country_model.dart';
-
+///
+/// read json all address of country (_countrys / _citys / _districts)
+///
 class CountryProvider {
   static final _instance = CountryProvider._internal();
   final _countrys = <Country>[];

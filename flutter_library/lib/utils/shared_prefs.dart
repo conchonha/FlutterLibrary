@@ -7,17 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs {
   final Gson _gson = Gson();
   SharedPreferences? _prefs;
-  static final SharedPrefs _instance = SharedPrefs._internal();
 
-  factory SharedPrefs() {
-    return _instance;
-  }
-
-  SharedPrefs._internal() {
-    _initialise();
-  }
-
-  Future _initialise() async {
+  Future initialise() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
@@ -59,13 +50,21 @@ class SharedPrefs {
     return null;
   }
 
-  removeAll() {
+  void removeAll() {
     if (_prefs == null) throw ("SharedPreferences not init");
     _prefs?.clear();
   }
 
-  removeKey(String key) {
+  void removeKey(String key) {
     if (_prefs == null) throw ("SharedPreferences not init");
     _prefs?.remove(key);
+  }
+
+  @override
+  int get hashCode => toString().hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return toString() == other.toString();
   }
 }

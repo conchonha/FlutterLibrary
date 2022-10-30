@@ -7,7 +7,7 @@ import 'package:mailer/smtp_server.dart';
 class MailerSetup{
   static Future<int> setup(String email,BuildContext context) async{
     String username = 'thaibasang08081999@gmail.com';
-    String password = 'nguyenthinguyetminh1402200008081999';
+    String password = '';
     int number = Random().nextInt(100000);
 
     final smtpServer = gmail(username, password);
