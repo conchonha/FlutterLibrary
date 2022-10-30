@@ -1,6 +1,7 @@
 import 'package:regexpattern/regexpattern.dart';
 
 class ValidateUtil {
+  /// [isEmail] check invalid email
   static bool isEmail(String? em) {
     if (em == null) return false;
     String p =
@@ -9,11 +10,13 @@ class ValidateUtil {
     return regExp.hasMatch(em);
   }
 
+  /// [isNumber] check invalid number
   static bool isNumber(String value) {
     RegExp regExp = RegExp(r'^[0-9]*$');
     return regExp.hasMatch(value);
   }
 
+  /// [isPasswordSecure] check invalid password
   static bool isPasswordSecure(String value) {
     if (value.isEmpty) {
       return false;
@@ -30,8 +33,39 @@ class ValidateUtil {
     if (!regExp.hasMatch(value)) {
       return false;
     }
-
     return true;
+  }
+
+  /// [isPhoneUser] check invalid Phone
+  static bool isPhoneUser(String? phone) => RegVal.hasMatch(phone, RegexPattern.phone);
+
+  /// [isNameUser] check invalid user Name
+  static bool isNameUser(String? value) => RegVal.hasMatch(value, RegexPattern.username);
+
+  /// [isUrl] check invalid Url
+  static bool isUrl(String? value) => RegVal.hasMatch(value, RegexPattern.url);
+
+  /// [isHexadecimal] check invalid hexadecimal
+  static bool isHexadecimal(String? value) => RegVal.hasMatch(value, RegexPattern.hexadecimal);
+
+  /// [isVector] check invalid Vector
+  static bool isVector(String? value) => RegVal.hasMatch(value, RegexPattern.vector);
+
+  /// [isImage] check invalid Image
+  static bool isImage(String? value) => RegVal.hasMatch(value, RegexPattern.image);
+
+  /// [isAudio] check invalid Audio
+  static bool isAudio(String? value) => RegVal.hasMatch(value, RegexPattern.audio);
+
+  /// [isVideo] check invalid Audio
+  static bool isVideo(String? value) => RegVal.hasMatch(value, RegexPattern.video);
+
+  static bool isPasswordAndConfirmPasswordMatch(
+      String password, String confirmPassword) {
+    if (password == confirmPassword) {
+      return true;
+    }
+    return false;
   }
 
   static int calculateAge(DateTime birthDate) {
@@ -54,43 +88,6 @@ class ValidateUtil {
   static bool doesGreatEqualThan14Years(DateTime dateSelected) {
     // check >14 year old
     if (calculateAge(dateSelected) >= 14) {
-      return true;
-    }
-    return false;
-  }
-
-  static bool isPhoneValid(String value) {
-    if (value.contains(RegExp(r'[A-Z]')) ||
-        value.contains(RegExp(r'[a-z]'))) {
-      return false;
-    }
-    return true;
-  }
-
-  static bool isPhoneUser(String? phone) {
-    if (phone != null && RegVal.hasMatch(phone, RegexPattern.phone)) {
-      return true;
-    }
-    return false;
-  }
-
-  static bool isPasswordAndConfirmPasswordMatch(
-      String password, String confirmPassword) {
-    if (password == confirmPassword) {
-      return true;
-    }
-    return false;
-  }
-
-  static bool isNameUser(String? value) {
-    if (value != null && RegVal.hasMatch(value, RegexPattern.username)) {
-      return true;
-    }
-    return false;
-  }
-
-  static bool isPassUser(String? value) {
-    if (value != null && RegVal.hasMatch(value, RegexPattern.passport)) {
       return true;
     }
     return false;

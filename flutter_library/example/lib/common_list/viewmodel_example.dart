@@ -7,15 +7,18 @@ import 'package:flutter_library/model/data/result.dart';
 
 import 'common_list_example.dart';
 
+/// example test Base vm
 class ViewModelExample extends BaseVM{
   final _Action action = _Action();
 
   @override
   void onInit() {
-
+    /// example test Toast display
+    showToast("init viewModel");
   }
 }
 
+/// example test common action
 class _Action extends CommonAction<User> {
   bool a = false;
 
@@ -23,6 +26,7 @@ class _Action extends CommonAction<User> {
   @override
   void onClickListener(User data) {
     super.onClickListener(data);
+    /// example test loading dialog
     a = !a;
     if(a){
       manager.setResult(const Result.loading(loading: true));
@@ -41,6 +45,7 @@ class _Action extends CommonAction<User> {
   @override
   void onLongClickListener(User data) {
     super.onLongClickListener(data);
+    ///example test error
     manager.setResult(Result.fail(error: TimeoutException("Qua thoi gian")));
     debugPrint("Test exception: ${manager.toString()}");
   }
